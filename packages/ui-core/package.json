@@ -1,0 +1,56 @@
+{
+  "name": "@stacks/ui-core",
+  "version": "7.3.0",
+  "author": "Thomas Osmonson",
+  "dependencies": {
+    "@styled-system/should-forward-prop": "^5.1.5",
+    "camelcase": "^6.0.0",
+    "micro-memoize": "^4.0.9"
+  },
+  "devDependencies": {
+    "@blockstack/prettier-config": "^0.0.6",
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.1",
+    "@types/lodash-es": "^4.17.3",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "husky": "^4.2.5",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "tslib": "^2.0.1",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "peerDependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.1",
+    "react": "^17.0.1"
+  },
+  "prettier": "@blockstack/prettier-config",
+  "private": false,
+  "scripts": {
+    "build": "tsdx build --tsconfig tsconfig.json && yarn types",
+    "types": "tsc --project tsconfig.json",
+    "lint": "tsdx lint",
+    "prepublishOnly": "yarn build",
+    "start": "tsdx watch --verbose --noClean --onSuccess yalc publish --push",
+    "test": "tsdx test --passWithNoTests"
+  },
+  "sideEffects": false,
+  "typings": "dist/types/index.d.ts",
+  "umd:main": "dist/ui-core.umd.production.js",
+  "unpkg": "dist/ui-core.cjs.production.min.js",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "name": "@stacks/ui-monorepo",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/config-lerna-scopes": "^11.0.0",
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.1",
+    "@emotion/styled": "^11.0.0",
+    "@octokit/core": "^3.3.0",
+    "@stacks/eslint-config": "^1.0.7",
+    "@stacks/prettier-config": "^0.0.7",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "eslint": "^7.21.0",
+    "eslint-plugin-react": "^7.20.6",
+    "husky": "^4.2.5",
+    "jest": "^26.6.3",
+    "lerna": "^3.22.1",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "ts-jest": "^26.5.3",
+    "tsdx": "^0.14.1",
+    "typescript": "^4.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "prettier": "@stacks/prettier-config",
+  "private": true,
+  "resolutions": {
+    "@changesets/apply-release-plan": "^4.2.0",
+    "@changesets/changelog-github": "^0.3.0",
+    "@changesets/cli": "^2.14.1",
+    "@changesets/git": "1.1.0",
+    "typescript": "^4.2.3",
+    "ts-jest": "^26.5.3",
+    "tsdx": "^0.14.1"
+  },
+  "scripts": {
+    "build": "lerna run build --scope=@stacks/ui-theme && lerna run build --scope=@stacks/{ui-core,ui-utils} --no-bail --stream && lerna run build --scope=@stacks/ui",
+    "build:ui": "lerna run build --scope @stacks/ui",
+    "build:ui-core": "lerna run build --scope @stacks/ui-core",
+    "build:ui-theme": "lerna run build --scope @stacks/ui-theme",
+    "build:ui-utils": "lerna run build --scope @stacks/ui-utils",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "lint:eslint": "eslint \"packages/**/src/**/*.{ts,tsx|!(d.ts)}\" -f unix",
+    "lint:fix": "eslint \"packages/**/src/**/*.{ts,tsx}\" -f unix --fix",
+    "lint:prettier": "prettier --check \"packages/**/src/**/*.{ts,tsx|!(d.ts)}\" *.js",
+    "lint:prettier:fix": "prettier --write \"packages/**/src/**/*.{ts,tsx|!(d.ts)}\" *.js",
+    "start": "lerna run start --scope=@stacks/{ui,ui-core,ui-theme} --parallel --no-bail --stream",
+    "typecheck": "lerna run typecheck --parallel --no-bail --stream",
+    "changeset:publish": "changeset publish",
+    "changeset:version": "changeset version",
+    "release": "yarn build && yarn changeset:publish",
+    "version": "lerna bootstrap",
+    "postinstall": "patch-package"
+  },
+  "workspaces": [
+    "packages/**"
+  ],
+  "dependencies": {
+    "@changesets/apply-release-plan": "^4.2.0",
+    "@changesets/changelog-github": "^0.3.0",
+    "@changesets/cli": "^2.14.1",
+    "@changesets/git": "1.1.0",
+    "patch-package": "^6.4.6",
+    "postinstall-postinstall": "^2.1.0"
+  }
+}
